@@ -1,0 +1,623 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Wedding of Darkasyi & Askia</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Alex+Brush&family=Cinzel:wght@400;600;700&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Animation Library -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg-cream: #faf6f0;
+            --bg-card: #ffffff;
+            --gold-primary: #c5a059;
+            --gold-light: #e5c178;
+            --gold-dark: #96722d;
+            --text-dark: #2c2a29;
+            --text-muted: #7a7571;
+            --shadow-soft: 0 10px 30px rgba(197, 160, 89, 0.12);
+            --border-gold: 1px solid rgba(197, 160, 89, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: #e8e3dc;
+            color: var(--text-dark);
+            font-family: 'Montserrat', sans-serif;
+            overflow-x: hidden;
+        }
+
+        .main-wrapper {
+            max-width: 480px;
+            margin: 0 auto;
+            background-color: var(--bg-cream);
+            min-height: 100vh;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+
+        /* COVER OVERLAY */
+        #cover {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            height: 100vh;
+            background: linear-gradient(rgba(250, 246, 240, 0.85), rgba(250, 246, 240, 0.95)), 
+                        url('foto cincin.jpeg') center/cover no-repeat;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 30px;
+            transition: transform 0.8s cubic-bezier(0.77, 0, 0.175, 1);
+        }
+
+        #cover.open {
+            transform: translate(-50%, -100%);
+        }
+
+        .cover-subtitle {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 4px;
+            font-size: 0.8rem;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+            margin-bottom: 15px;
+        }
+
+        .cover-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.8rem;
+            color: var(--gold-dark);
+            margin: 10px 0;
+            line-height: 1.2;
+        }
+
+        .guest-box {
+            background: rgba(255, 255, 255, 0.8);
+            border: var(--border-gold);
+            padding: 20px 30px;
+            border-radius: 15px;
+            margin: 25px 0;
+            backdrop-filter: blur(5px);
+        }
+
+        .btn-open {
+            background: linear-gradient(135deg, var(--gold-primary), var(--gold-dark));
+            color: #fff;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 6px 20px rgba(197, 160, 89, 0.4);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-open:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(197, 160, 89, 0.6);
+        }
+
+        /* MUSIC CONTROLLER */
+        .music-btn {
+            position: fixed;
+            bottom: 25px;
+            right: calc(50% - 220px);
+            width: 45px;
+            height: 45px;
+            background: var(--gold-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 999;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            border: 2px solid #fff;
+            animation: spin 6s linear infinite;
+        }
+
+        @media (max-width: 480px) {
+            .music-btn { right: 20px; }
+        }
+
+        .music-btn.paused {
+            animation-play-state: paused;
+            background: #999;
+        }
+
+        @keyframes spin {
+            100% { transform: rotate(360deg); }
+        }
+
+        /* HEADER HERO */
+        .hero {
+            padding: 70px 25px 50px;
+            text-align: center;
+            background: radial-gradient(circle, rgba(255,255,255,0.9) 0%, rgba(250,246,240,1) 100%);
+            border-bottom: var(--border-gold);
+            position: relative;
+        }
+
+        .hero h2 {
+            font-family: 'Cinzel', serif;
+            font-size: 0.85rem;
+            letter-spacing: 3px;
+            color: var(--gold-dark);
+            text-transform: uppercase;
+        }
+
+        .hero h1 {
+            font-family: 'Alex Brush', cursive;
+            font-size: 4rem;
+            color: var(--gold-dark);
+            margin: 15px 0;
+        }
+
+        .hero-date {
+            font-family: 'Cinzel', serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+
+        .section {
+            padding: 35px 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border-radius: 20px;
+            padding: 30px 20px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow-soft);
+            border: var(--border-gold);
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            color: var(--gold-dark);
+            margin-bottom: 25px;
+            letter-spacing: 2px;
+        }
+
+        .section-title::after {
+            content: '❖';
+            display: block;
+            font-size: 0.8rem;
+            color: var(--gold-primary);
+            margin-top: 5px;
+        }
+
+        /* BINGKAI FOTO PROFIL MEMPELAI */
+        .profile-frame {
+            position: relative;
+            width: 160px;
+            height: 160px;
+            margin: 0 auto 20px;
+            padding: 5px;
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark));
+            border-radius: 50%;
+            box-shadow: var(--shadow-soft);
+            overflow: hidden;
+        }
+
+        .profile-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+
+        .couple-name {
+            font-family: 'Cinzel', serif;
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .couple-parents {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        .ampersand-divider {
+            font-family: 'Alex Brush', cursive;
+            font-size: 3.5rem;
+            color: var(--gold-primary);
+            margin: 25px 0;
+        }
+
+        .event-box {
+            background: var(--bg-cream);
+            border-radius: 15px;
+            padding: 20px;
+            margin: 15px 0;
+            border: 1px dashed var(--gold-primary);
+        }
+
+        .event-box i {
+            font-size: 1.5rem;
+            color: var(--gold-primary);
+            margin-bottom: 10px;
+        }
+
+        .event-box h4 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold-dark);
+            margin-bottom: 8px;
+        }
+
+        .event-box p {
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            line-height: 1.5;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin: 25px 0 10px;
+        }
+
+        .cd-item {
+            background: var(--bg-card);
+            border: 1px solid var(--gold-light);
+            border-radius: 12px;
+            padding: 10px;
+            min-width: 65px;
+            box-shadow: var(--shadow-soft);
+        }
+
+        .cd-number {
+            font-family: 'Cinzel', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold-dark);
+        }
+
+        .cd-label {
+            font-size: 0.65rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .gallery-item {
+            border-radius: 12px;
+            overflow: hidden;
+            border: var(--border-gold);
+            height: 160px;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.08);
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .form-group label {
+            font-size: 0.8rem;
+            color: var(--gold-dark);
+            font-weight: 600;
+            margin-bottom: 5px;
+            display: block;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border-radius: 10px;
+            border: 1px solid rgba(197, 160, 89, 0.4);
+            background: var(--bg-cream);
+            font-family: inherit;
+            font-size: 0.9rem;
+            color: var(--text-dark);
+            outline: none;
+        }
+
+        .form-control:focus {
+            border-color: var(--gold-dark);
+            background: #fff;
+        }
+
+        footer {
+            padding: 30px 20px;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            background: var(--bg-cream);
+            border-top: var(--border-gold);
+        }
+
+        .footer-title {
+            font-family: 'Alex Brush', cursive;
+            font-size: 2.8rem;
+            color: var(--gold-dark);
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+
+        <!-- AUDIO PLAYER -->
+        <audio id="weddingAudio" loop preload="auto">
+            <source src="musik.mp3" type="audio/mpeg">
+        </audio>
+
+        <div class="music-btn paused" id="musicBtn" onclick="toggleMusic()">
+            <i class="fa-solid fa-music"></i>
+        </div>
+
+        <!-- COVER SCREEN -->
+        <div id="cover">
+            <p class="cover-subtitle">The Wedding Invitation</p>
+            <h1 class="cover-title">Darkasyi & Askia</h1>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">Senin, 14 November 2026</p>
+            
+            <div class="guest-box">
+                <p style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px;">Kepada Yth. Bapak/Ibu/Saudara/i</p>
+                <h3 style="font-family: 'Cinzel', serif; color: var(--gold-dark); margin-top: 5px;">Tamu Undangan</h3>
+            </div>
+
+            <button class="btn-open" onclick="openInvitation()">
+                <i class="fa-envelope-open"></i> Buka Undangan
+            </button>
+        </div>
+
+        <!-- HERO SECTION -->
+        <div class="hero">
+            <h2>Walimatul 'Ursy</h2>
+            <h1>Darkasyi & Askia</h1>
+            <p class="hero-date">14 . 11 . 2026</p>
+        </div>
+
+        <!-- QURAN QUOTE -->
+        <div class="section">
+            <div class="card" data-aos="fade-up">
+                <p style="font-size: 1.2rem; font-family: serif; color: var(--gold-dark); margin-bottom: 15px;">
+                    وَمِنْ اٰيٰتِهٖۤ اَنْ خَلَقَ لَكُمْ مِّنْ اَنْفُسِكُمْ اَزْوَاجًا لِّتَسْكُنُوْۤا اِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَّوَدَّةً وَّرَحْمَةً
+                </p>
+                <p style="font-size: 0.85rem; color: var(--text-muted); line-height: 1.6; font-style: italic;">
+                    "Dan di antara tanda-tanda kekuasaan-Nya ialah Dia menciptakan untukmu isteri-isteri dari jenismu sendiri, supaya kamu cenderung dan merasa tenteram kepadanya, dan dijadikan-Nya di antaramu rasa kasih dan sayang."
+                </p>
+                <span style="font-weight: 600; font-size: 0.8rem; color: var(--gold-dark); display: block; margin-top: 10px;">(Ar-Rum: 21)</span>
+            </div>
+
+            <!-- MEMPELAI -->
+            <div class="card" data-aos="fade-up">
+                <h2 class="section-title">Mempelai</h2>
+                <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 30px;">
+                    Dengan memohon rahmat dan ridho Allah SWT, kami bermaksud menyelenggarakan syukuran pernikahan putra-putri kami:
+                </p>
+
+                <!-- Mempelai Pria -->
+                <div>
+                    <div class="profile-frame">
+                        <img src="foto cowok.jpg" alt="Muhammad Darkasyi" class="profile-img">
+                    </div>
+                    <h3 class="couple-name">Muhammad Darkasyi</h3>
+                    <p class="couple-parents">
+                        Putra dari:<br>
+                        <b>Bapak Sya’ban (Alm)</b><br>
+                        & <b>Ibu Rohani</b>
+                    </p>
+                </div>
+
+                <div class="ampersand-divider">&</div>
+
+                <!-- Mempelai Wanita -->
+                <div>
+                    <div class="profile-frame">
+                        <img src="foto cewek.jpg" alt="Askia Nisa" class="profile-img">
+                    </div>
+                    <h3 class="couple-name">Askia Nisa</h3>
+                    <p class="couple-parents">
+                        Putri dari:<br>
+                        <b>Bapak Muhammad Daud (Alm)</b><br>
+                        & <b>Ibu Jamaliah</b>
+                    </p>
+                </div>
+            </div>
+
+            <!-- DETAIL ACARA -->
+            <div class="card" data-aos="fade-up">
+                <h2 class="section-title">Rangkaian Acara</h2>
+                
+                <div class="event-box">
+                    <i class="fa-regular fa-calendar-days"></i>
+                    <h4>Hari & Tanggal</h4>
+                    <p><b>Senin, 14 November 2026</b></p>
+                </div>
+
+                <div class="event-box">
+                    <i class="fa-solid fa-clock"></i>
+                    <h4>Waktu Pelaksanaan</h4>
+                    <p>Pukul 09:00 WIB s/d Selesai</p>
+                </div>
+
+                <div class="event-box">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <h4>Lokasi Acara</h4>
+                    <p><b>Kediaman Mempelai Wanita</b><br>Lampoh Saka, Sumboe Baroeh</p>
+                </div>
+
+                <!-- COUNTDOWN -->
+                <h4 style="font-family: 'Cinzel', serif; color: var(--gold-dark); margin-top: 25px;">Menghitung Hari</h4>
+                <div class="countdown-container" id="countdown">
+                    <div class="cd-item"><div class="cd-number" id="cd-days">00</div><div class="cd-label">Hari</div></div>
+                    <div class="cd-item"><div class="cd-number" id="cd-hours">00</div><div class="cd-label">Jam</div></div>
+                    <div class="cd-item"><div class="cd-number" id="cd-minutes">00</div><div class="cd-label">Menit</div></div>
+                    <div class="cd-item"><div class="cd-number" id="cd-seconds">00</div><div class="cd-label">Detik</div></div>
+                </div>
+
+                <a href="https://maps.google.com/?q=Lampoh+Saka+Sumboe+Baroeh" target="_blank" class="btn-open" style="margin-top: 20px; text-decoration: none;">
+                    <i class="fa-solid fa-map-location-dot"></i> Buka Google Maps
+                </a>
+            </div>
+
+            <!-- GALERI FOTO -->
+            <div class="card" data-aos="fade-up">
+                <h2 class="section-title">Galeri Bahagia</h2>
+                <div class="gallery-grid">
+                    <div class="gallery-item"><img src="foto cincin.jpeg" alt="Cincin"></div>
+                    <div class="gallery-item"><img src="foto cewek.jpg" alt="Askia"></div>
+                    <div class="gallery-item"><img src="foto cowok.jpg" alt="Darkasyi"></div>
+                    <div class="gallery-item"><img src="foto cincin.jpeg" alt="Momen"></div>
+                </div>
+            </div>
+
+            <!-- BUKU TAMU / RSVP -->
+            <div class="card" data-aos="fade-up">
+                <h2 class="section-title">Konfirmasi Kehadiran</h2>
+                <form id="rsvpForm" onsubmit="submitRSVP(event)">
+                    <div class="form-group">
+                        <label>Nama Lengkap</label>
+                        <input type="text" id="guestName" class="form-control" placeholder="Masukkan nama Anda" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Konfirmasi Kehadiran</label>
+                        <select id="attendance" class="form-control" required>
+                            <option value="Hadir">Ya, Saya Akan Hadir</option>
+                            <option value="Tidak Hadir">Maaf, Tidak Bisa Hadir</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Ucapan & Doa</label>
+                        <textarea id="message" class="form-control" rows="3" placeholder="Tuliskan ucapan selamat & doa..." required></textarea>
+                    </div>
+                    <button type="submit" class="btn-open" style="width: 100%; justify-content: center; border-radius: 10px;">
+                        <i class="fa-solid fa-paper-plane"></i> Kirim Konfirmasi
+                    </button>
+                </form>
+
+                <div id="wishesContainer" style="margin-top: 25px; text-align: left; max-height: 200px; overflow-y: auto;">
+                    <!-- Pesan akan muncul di sini -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER -->
+        <footer>
+            <p>Terima Kasih Atas Doa & Restunya</p>
+            <div class="footer-title">Darkasyi & Askia</div>
+            <p style="font-size: 0.75rem; opacity: 0.7;">Wassalamu'alaikum Warahmatullahi Wabarakatuh</p>
+        </footer>
+
+    </div>
+
+    <!-- AOS & JS Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true
+        });
+
+        const audio = document.getElementById('weddingAudio');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function openInvitation() {
+            document.getElementById('cover').classList.add('open');
+            audio.play().then(() => {
+                musicBtn.classList.remove('paused');
+            }).catch(err => {
+                console.log("Browser menahan musik autoplay:", err);
+            });
+        }
+
+        function toggleMusic() {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.classList.remove('paused');
+            } else {
+                audio.pause();
+                musicBtn.classList.add('paused');
+            }
+        }
+
+        // COUNTDOWN TIMER
+        const targetDate = new Date("November 14, 2026 09:00:00").getTime();
+        setInterval(() => {
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+
+            if (diff > 0) {
+                document.getElementById('cd-days').innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById('cd-hours').innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById('cd-minutes').innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById('cd-seconds').innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // RSVP SIMULATION
+        function submitRSVP(e) {
+            e.preventDefault();
+            const name = document.getElementById('guestName').value;
+            const status = document.getElementById('attendance').value;
+            const msg = document.getElementById('message').value;
+
+            const container = document.getElementById('wishesContainer');
+            const wishBox = document.createElement('div');
+            wishBox.style.cssText = "background: var(--bg-cream); padding: 12px; border-radius: 8px; margin-bottom: 10px; border-left: 3px solid var(--gold-primary); font-size: 0.85rem;";
+            wishBox.innerHTML = `<strong>${name}</strong> <span style="font-size:0.75rem; color:var(--gold-dark);">(${status})</span><p style="margin-top:4px; color:var(--text-dark);">${msg}</p>`;
+            
+            container.prepend(wishBox);
+            document.getElementById('rsvpForm').reset();
+            alert('Terima kasih atas konfirmasi dan doanya!');
+        }
+    </script>
+</body>
+</html>
